@@ -30,3 +30,15 @@ if "files_ready" in st.session_state and st.session_state["files_ready"]:
             file_name="abc.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
+
+# Create two columns for buttons
+col1, col2 = st.columns([1, 1])
+
+with col1:
+    run_clicked = st.button("Run Models")
+
+with col2:
+    flask_url = "http://localhost:6060"  # Update Flask URL
+    if st.button("Next"):
+        st.markdown(f'<meta http-equiv="refresh" content="0;URL={flask_url}">', unsafe_allow_html=True)
