@@ -1,0 +1,32 @@
+ # Store file paths in session state
+        st.session_state["file1"] = file1
+        st.session_state["file2"] = file2
+        st.session_state["file3"] = file3
+        st.session_state["files_ready"] = True
+    else:
+        st.warning("Please upload both PDF and Excel files to proceed.")
+
+if "files_ready" in st.session_state and st.session_state["files_ready"]:
+    with open(st.session_state["file1"], "rb") as f:
+        st.download_button(
+            label="Download Translated File",
+            data=f,
+            file_name="explanation.txt",
+            mime="text/plain"
+        )
+    
+    with open(st.session_state["file2"], "r") as f:
+        st.download_button(
+            label="Download Key Value Pairs",
+            data=f,
+            file_name="convertcsv.json",
+            mime="application/json"
+        )
+    
+    with open(st.session_state["file3"], "rb") as f:
+        st.download_button(
+            label="Download Populated Excel File",
+            data=f,
+            file_name="abc.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
